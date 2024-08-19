@@ -11,10 +11,13 @@
 
 require 'faker'
 
-30.times do
+usernames = ["Juan", "Catalina", "Marcos", "Ingrid", "Oscar", "Elisa"]
+
+50.times do
   Tweet.create!(
-    username: 'Juan',
-    description: Faker::Lorem.paragraph_by_chars(number: 280, supplemental: false)
+    userName: usernames.sample,
+    description: Faker::Lorem.paragraph_by_chars(number: 280, supplemental: false),
+    created_at: Faker::Time.between(from: 2.year.ago, to: Time.now)
   )
 end
 
