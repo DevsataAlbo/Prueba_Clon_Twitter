@@ -9,3 +9,13 @@
 #   end
 
 
+require 'faker'
+
+30.times do
+  Tweet.create!(
+    username: 'Juan',
+    description: Faker::Lorem.paragraph_by_chars(number: 280, supplemental: false)
+  )
+end
+
+puts 'Tweets creados con exito'
