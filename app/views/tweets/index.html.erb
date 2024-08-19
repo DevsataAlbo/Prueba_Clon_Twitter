@@ -1,24 +1,44 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Tweets</h1>
+<h1 class="text-center">Tweets</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            <p class="text-center">Usuarios</p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Juan</li>
+              <li class="list-group-item">Ingrid</li>
+              <li class="list-group-item">Oscar</li>
+              <li class="list-group-item">Elisa</li>
+              <li class="list-group-item">Marcos</li>
+              <li class="list-group-item">Catalina</li>
+            </ul>
+        </div>
+        <div class="col-10">
+            <%= form_with url: tweets_path, method: :get do |form|%>
+              <%= form.text_field :query_text, placeholder: ('Ingresa el usuario que deseas buscar...'), value: params[:query_text], class:"form-control mb-3"%>
+            <%end%>
 
 
-<%= form_with url: tweets_path, method: :get do |form|%>
-  <%= form.text_field :query_text, placeholder: t('Query text'), value: params[:query_text]%>
-<%end%>
+            <div id="tweets">
+              <% @tweets.each do |tweet| %>
+                <%= render tweet %>
+                <p>
+                  <%= link_to "Show this tweet", tweet %>
+                </p>
+              <% end %>
+            </div>
 
 
-<div id="tweets">
-  <% @tweets.each do |tweet| %>
-    <%= render tweet %>
-    <p>
-      <%= link_to "Show this tweet", tweet %>
-    </p>
-  <% end %>
+
+            <%=raw pagy_nav(@pagy)%>
+
+            <%= link_to "New tweet", new_tweet_path %>
+
+
+        </div>
+    </div>
 </div>
 
 
-
-<%=raw pagy_nav(@pagy)%>
-
-<%= link_to "New tweet", new_tweet_path %>
